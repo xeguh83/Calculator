@@ -13,46 +13,6 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <style>
-            #calcWindow {
-                float: left;
-                width: 214px;
-                height: 286px;
-                background: #D9E4F1 linear-gradient(to top, #D9E4F1, #EDF4FC);
-                border-radius: 5px;
-                border-width: 1px;
-                box-shadow: 0 0 10px;
-                display: block;
-                margin-left: 2px;
-                margin-right: 2px;
-                padding: 0.35em 0.75em 0.625em;
-            }
-            .roundBordered{
-                border-radius: 2px;
-                border: 1px solid #8E9CAD;
-            }
-            .field {
-                display: block;
-                height: 50px;
-                margin: auto;
-                width: 90%;
-                padding: 0px;
-                background: #E6EFFB linear-gradient(to top, #FFFFFF, #E6EFFB);
-            }
-            #innerFieldSet{
-                border: 0px;
-                padding: 0px;
-                width: 206px;
-                display: block;
-                margin: 0 auto;
-                text-align: center;
-            }
-            .memory{
-                width: 34px;
-                height: 27px;
-                margin: 1px;
-            }
-        </style>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -60,34 +20,40 @@
         <![endif]-->
 
         <fieldset id="calcWindow">
-            <input type="text" class="field roundBordered">
-            <fieldset id="innerFieldSet" style="border: 1px; padding:5px;">
-                <input type="button" class="memory" value= "MC">
-                <input type="button" class="memory" value= "MR">
-                <input type="button" class="memory" value= "MS">
-                <input type="button" class="memory" value= "M+">
-                <input type="button" class="memory" value= "M-">
-                <input type="button" class="memory" value= "&larr;">
-                <input type="button" class="memory" value= "CE">
-                <input type="button" class="memory" value= "C">
-                <input type="button" class="memory" value= "&plusmn;">
-                <input type="button" class="memory" value= "&radic;">
-                <input type="button" class="memory" value= "7">
-                <input type="button" class="memory" value= "8">
-                <input type="button" class="memory" value= "9">
-                <input type="button" class="memory" value= "&sol;">
-                <input type="button" class="memory" value= "&percnt;">
-                <input type="button" class="memory" value= "4">
-                <input type="button" class="memory" value= "5">
-                <input type="button" class="memory" value= "6">
-                <input type="button" class="memory" value= "&ast;">
-                <input type="button" class="memory" value= "&frac12;">
-                <input type="button" class="memory" value= "1">
-                <input type="button" class="memory" value= "2">
-                <input type="button" class="memory" value= "3">
-                <input type="button" class="memory" value= "-">
-                <input type="button" style="height: 70px" class="memory" value= "=">
-            </fieldset>
+            <input id="value" value="1234567890123" type="text" class="field roundBordered" readonly>
+            <div class="fieldset">
+                <input id="mc" type="button" class="memory" value= "MC">
+                <input id="mr" type="button" class="memory" value= "MR">
+                <input id="ms" type="button" class="memory" value= "MS">
+                <input id="m+" type="button" class="memory" value= "M+">
+                <input id="m-" type="button" class="memory" value= "M-">
+                <input id="back" type="button" class="memory" value= "&larr;">
+                <input id="ce" type="button" class="memory" value= "CE">
+                <input id="c" type="button" class="memory" value= "C">
+                <input id="pm" type="button" class="memory" value= "&plusmn;">
+                <input id="sqrt" type="button" class="memory" value= "&radic;">
+                <input id="b7" type="button" class="memory" value= "7">
+                <input id="b8" type="button" class="memory" value= "8">
+                <input id="b9" type="button" class="memory" value= "9">
+                <input id="slash" type="button" class="memory" value= "&sol;">
+                <input id="percent" type="button" class="memory" value= "&percnt;">
+                <input id="b4" type="button" class="memory" value= "4">
+                <input id="b5" type="button" class="memory" value= "5">
+                <input id="b6" type="button" class="memory" value= "6">
+                <input id="mult" type="button" class="memory" value= "&ast;">
+                <input id="unpow" type="button" class="memory" value= "&frac12;">
+                <div>
+                    <input id="b1" type="button" class="memory" value= "1">
+                    <input id="b2" type="button" class="memory" value= "2">
+                    <input id="b3" type="button" class="memory" value= "3">
+                    <input id="minus" type="button" class="memory" value= "-">
+                    <input type="button" style="height: 60px; position: absolute; left: 176px" class="memory" value= "=">
+                    <input id="b0" style="width: 78px;" type="button" class="memory" value= "0">
+                    <input id="zap" type="button" class="memory" value= ",">
+                    <input id="plus" type="button" class="memory" value= "+">
+                </div>
+            </div>
+
         </fieldset>
 
         <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js"></script>

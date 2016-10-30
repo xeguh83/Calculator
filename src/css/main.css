@@ -87,22 +87,51 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#calcWindow {
+    float: left;
+    width: 230px;
+    height: 250px;
+    background: #D9E4F1 linear-gradient(to top, #D9E4F1, #EDF4FC);
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: 0 0 10px;
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 0.35em 0.75em 0.625em;
+}
+.roundBordered{
+    border-radius: 2px;
+    border: 1px solid #8E9CAD;
+}
+.field {
+    display: block;
+    height: 50px;
+    margin: auto;
+    width: 90%;
+    padding: 0px 5px 0px 0px;
+    text-align: right;
+    font-size: 24px;
+    font-family: monospace;
+    background: #E6EFFB linear-gradient(to top, #FFFFFF, #E6EFFB);
+}
+#innerFieldSet{
+    border: 0px;
+    padding: 0px;
+    width: 206px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+.memory{
+    width: 34px;
+    height: 27px;
+    margin: 3px;
+}
+.fieldset{
+    position: relative;
+    left: 7px;
+}
 
 /* ==========================================================================
    Helper classes
