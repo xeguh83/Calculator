@@ -17,52 +17,52 @@ var ceClick = function () {
 ce.onclick = ceClick;
 
 var b1Click = function () {
-    value.value = +(value.value + "1");
+    setValue(value.value + "1");
 }
 b1.onclick = b1Click;
 
 var b2Click = function () {
-    value.value = +(value.value + "2");
+    setValue(value.value + "2");
 }
 b2.onclick = b2Click;
 
 var b3Click = function () {
-    value.value = +(value.value + "3");
+    setValue(value.value + "3");
 }
 b3.onclick = b3Click;
 
 var b4Click = function () {
-    value.value = +(value.value + "4");
+    setValue(value.value + "4");
 }
 b4.onclick = b4Click;
 
 var b5Click = function () {
-    value.value = +(value.value + "5");
+    setValue(value.value + "5");
 }
 b5.onclick = b5Click;
 
 var b6Click = function () {
-    value.value = +(value.value + "6");
+    setValue(value.value + "6");
 }
 b6.onclick = b6Click;
 
 var b7Click = function () {
-    value.value = +(value.value + "7");
+    setValue(value.value + "7");
 }
 b7.onclick = b7Click;
 
 var b8Click = function () {
-    value.value = +(value.value + "8");
+    setValue(value.value + "8");
 }
 b8.onclick = b8Click;
 
 b9Click = function () {
-    value.value = +(value.value + "9");
+    setValue(value.value + "9");
 }
 b9.onclick = b9Click;
 
 b0Click = function () {
-    value.value = +(value.value + "0");
+    setValue(value.value + "0");
 }
 b0.onclick = b0Click;
 
@@ -93,4 +93,13 @@ function check(e) {
         b0Click();
     else if (code == 27)
         ceClick();
+}
+
+function setValue(num) {
+    if (isNaN(parseFloat(num)) || !isFinite(num)) {
+        value.value = "Ошибка вычисления";
+        return;
+    }
+    if (num.toString().length <= 13)
+        value.value = +num;
 }
