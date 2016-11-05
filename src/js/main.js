@@ -1,8 +1,9 @@
 var value = document.querySelector('#value');
 var firstArgument;
-var result;
+var hiddenValue = 0;
 var memory = 0;
 var printing = false;
+var operationPressed = false;
 var operation;
 var ce = document.querySelector('#ce');
 var b1 = document.querySelector('#b1');
@@ -19,10 +20,17 @@ var dot = document.querySelector("#zap");
 var pm = document.querySelector("#pm");
 var back = document.querySelector("#back");
 var plus = document.querySelector("#plus");
+var minus = document.querySelector("#minus");
+var mult = document.querySelector("#mult");
+var slash = document.querySelector("#slash");
 
 var ceClick = function () {
-    value.value = 0;
+    value.value = "0";
+    hiddenValue = 0;
     firstArgument = undefined;
+    operation = undefined;
+    printing = false;
+    operationPressed = false;
     setNormalFont();
 };
 ce.onclick = ceClick;
@@ -55,69 +63,97 @@ var backClick = function () {
 };
 back.onclick = backClick;
 
-var plusClick = function () {
+function operationClick(oper) {
     printing = false;
+    if (operationPressed) {
+        operation = oper;
+        return;
+    }
     var tempValue = value.value + "";
     tempValue = +(tempValue.replace(",", "."));
-    if (firstArgument = undefined) {
-        firstArgument = tempValue;
-        operation = addition;
+    if (!isNumeric(tempValue)) {
+        tempValue = hiddenValue;
     } else {
-        executeOperation(tempValue, addition);
+        hiddenValue = tempValue;
     }
+    if (firstArgument == null) {
+        firstArgument = tempValue;
+        operation = oper;
+    } else {
+        executeOperation(tempValue, oper);
+    }
+    operationPressed = true;
+}
+
+var plusClick = function () {
+    operationClick(addition);
 };
 plus.onclick = plusClick;
 
+var minusClick = function () {
+    operationClick(subtraction);
+};
+minus.onclick = minusClick;
+
+var multClick = function () {
+    operationClick(multiplication);
+};
+mult.onclick = multClick;
+
+var slashClick = function () {
+    operationClick(division);
+};
+slash.onclick = slashClick;
 var b1Click = function () {
     printValue("1");
 };
-b1.onclick = b1Click;
 
+b1.onclick = b1Click;
 var b2Click = function () {
     printValue("2");
 };
-b2.onclick = b2Click;
 
+b2.onclick = b2Click;
 var b3Click = function () {
     printValue("3");
 };
-b3.onclick = b3Click;
 
+b3.onclick = b3Click;
 var b4Click = function () {
     printValue("4");
 };
-b4.onclick = b4Click;
 
+b4.onclick = b4Click;
 var b5Click = function () {
     printValue("5");
 };
-b5.onclick = b5Click;
 
+b5.onclick = b5Click;
 var b6Click = function () {
     printValue("6");
 };
-b6.onclick = b6Click;
 
+b6.onclick = b6Click;
 var b7Click = function () {
     printValue("7");
 };
-b7.onclick = b7Click;
 
+b7.onclick = b7Click;
 var b8Click = function () {
     printValue("8");
 };
-b8.onclick = b8Click;
 
+b8.onclick = b8Click;
 b9Click = function () {
     printValue("9");
 };
-b9.onclick = b9Click;
 
+b9.onclick = b9Click;
 b0Click = function () {
     printValue("0");
 };
-b0.onclick = b0Click;
 
+b0.onclick = b0Click;
 window.addEventListener('keydown',this.check,false);
 
 function check(e) {
@@ -149,14 +185,21 @@ function check(e) {
         dotClick();
     else if (code == 8)
         backClick();
+    else if (code == 107)
+        plusClick();
+    else if (code == 109 || code == 189)
+        minusClick();
+    else if (code == 106)
+        multClick();
+    else if (code == 220 || code == 111)
+        slashClick();
 }
-
 function printValue(symbol) {
     if (!printing) {
         value.value = symbol;
-        firstArgument = 0;
         setNormalFont();
         printing = true;
+        operationPressed = false;
     } else {
         addSymbol(symbol);
     }
@@ -172,7 +215,7 @@ function setSmallFont() {
 
 function addSymbol(symbol) {
     var newValue = value.value == "0" ? symbol : value.value + symbol;
-    if (newValue.length > 17) {
+    if (newValue.length > 15) {
         return;
     }
     visualizeValue(newValue);
@@ -183,12 +226,29 @@ function isNumeric(num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 }
 
+function showError() {
+    setSmallFont();
+    value.value = "Ошибка вычисления";
+    printing = false;
+    hiddenValue = undefined;
+    firstArgument = undefined;
+    operation = undefined;
+}
+
 function executeOperation(secondArgument, nextOperation) {
     var result = operation(firstArgument, secondArgument);
+    if (!isNumeric(result)) {
+        showError();
+        return;
+    }
     operation = nextOperation;
-    if ((result + "").length > 17) {
+    hiddenValue = result;
+    firstArgument = result;
+    if ((result + "").length > 15) {
         value.value = result.toExponential(10);
         setSmallFont();
+    } else {
+        visualizeValue(result);
     }
 }
 
@@ -196,5 +256,23 @@ function visualizeValue(newValue) {
     value.value = newValue;
     if (newValue.toString().length >= 14) {
        setSmallFont();
+    } else {
+       setNormalFont();
     }
+}
+
+function addition(firstArgument, secondArgument) {
+    return firstArgument + secondArgument;
+}
+
+function subtraction(firstArgument, secondArgument) {
+    return firstArgument - secondArgument;
+}
+
+function multiplication(firstArgument, secondArgument) {
+    return firstArgument * secondArgument;
+}
+
+function division(firstArgument, secondArgument) {
+    return firstArgument / secondArgument;
 }
